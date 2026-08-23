@@ -1,4 +1,17 @@
-<?php get_header(); ?>
+<?php 
+get_header(); 
+
+// 1. Verifica se Slider está ativo
+if ( dvtone_get_option( 'enable_slider', 0 ) ) {
+    $slider_layout = dvtone_get_option( 'slider_layout', 'layout-1' );
+    get_template_part( 'template-parts/sliders/slider', $slider_layout );
+} 
+// 2. Se Slider estiver desativado, verifica se o Banner fixo está ativo
+elseif ( dvtone_get_option( 'enable_banner', 1 ) ) {
+    $banner_layout = dvtone_get_option( 'banner_layout', 'layout-1' );
+    get_template_part( 'template-parts/banners/hero', $banner_layout );
+}
+?>
 
 <main id="primary" class="flex-grow py-12">
     <div class="max-w-site mx-auto px-6">

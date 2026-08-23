@@ -18,6 +18,8 @@ require_once DVTONE_THEME_DIR . '/functions/portfolio-cpt.php';
 
 
 require_once DVTONE_THEME_DIR . '/inc/theme-settings.php';
+
+require_once DVTONE_THEME_DIR . '/inc/cpt-builder.php';
 /*
 require_once DVTONE_THEME_DIR . '/functions/widgets.php';
 require_once DVTONE_THEME_DIR . '/functions/hooks.php';
