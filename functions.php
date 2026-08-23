@@ -15,6 +15,9 @@ require_once DVTONE_THEME_DIR . '/functions/customizer.php';
 require_once DVTONE_THEME_DIR . '/functions/shortcodes.php';
 require_once DVTONE_THEME_DIR . '/functions/template-tags.php';
 require_once DVTONE_THEME_DIR . '/functions/portfolio-cpt.php';
+
+
+require_once DVTONE_THEME_DIR . '/inc/theme-settings.php';
 /*
 require_once DVTONE_THEME_DIR . '/functions/widgets.php';
 require_once DVTONE_THEME_DIR . '/functions/hooks.php';

@@ -1,3 +1,12 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
+// Resgata os valores da aba "Geral & Layout" com fallbacks
+$btn_text = dvtone_get_option( 'header_btn_text', __( 'Fale Conosco', 'dvtone' ) );
+$btn_url  = dvtone_get_option( 'header_btn_url', '#contato' );
+?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -34,15 +43,13 @@
             ?>
         </nav>
 
-        <!-- 3. Botão à Direita (com fallback/Customizer) -->
-        <?php 
-        $btn_text = get_theme_mod( 'header_btn_text', 'Fale Conosco' );
-        $btn_url  = get_theme_mod( 'header_btn_url', '#contato' );
-        ?>
+        <!-- 3. Botão à Direita (renderizado dinamicamente) -->
         <div class="header-action">
-            <a href="<?php echo esc_url( $btn_url ); ?>" class="inline-flex items-center px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-lg shadow-sm transition">
-                <?php echo esc_html( $btn_text ); ?>
-            </a>
+            <?php if ( ! empty( $btn_text ) ) : ?>
+                <a href="<?php echo esc_url( $btn_url ); ?>" class="inline-flex items-center px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-lg shadow-sm transition">
+                    <?php echo esc_html( $btn_text ); ?>
+                </a>
+            <?php endif; ?>
         </div>
 
     </div>
