@@ -1,53 +1,55 @@
 <?php get_header(); ?>
 
-<main id="primary" class="site-main py-5 flex-grow-1">
-    <div class="container" style="max-width: 1400px;">
+<main id="primary" class="flex-grow py-12">
+    <div class="max-w-site mx-auto px-6">
         
-        <header class="mb-5 text-center">
-            <h1 class="fw-bold mb-2">Últimos Posts</h1>
-            <p class="text-muted">Acompanhe as atualizações e artigos recentes.</p>
-        </header>
+        <!-- Título e Subtítulo da Seção -->
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight sm:text-4xl">Últimos Posts</h1>
+            <p class="mt-3 text-base text-slate-600">Confira as novidades, artigos e conteúdos recentes.</p>
+        </div>
 
         <?php if ( have_posts() ) : ?>
-            <div class="row g-4">
+            <!-- Grid de Posts -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <?php while ( have_posts() ) : the_post(); ?>
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <article id="post-<?php the_ID(); ?>" <?php post_class( 'card h-100 border rounded overflow-hidden shadow-sm' ); ?>>
-                            
-                            <?php if ( has_post_thumbnail() ) : ?>
-                                <a href="<?php the_permalink(); ?>" class="d-block ratio ratio-16x9">
-                                    <?php the_post_thumbnail( 'medium_large', [ 'class' => 'card-img-top object-fit-cover w-100 h-100' ] ); ?>
+                    <article id="post-<?php the_ID(); ?>" <?php post_class( 'flex flex-col bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition' ); ?>>
+                        
+                        <!-- Thumbnail -->
+                        <?php if ( has_post_thumbnail() ) : ?>
+                            <a href="<?php the_permalink(); ?>" class="aspect-video w-full overflow-hidden bg-slate-100 block">
+                                <?php the_post_thumbnail( 'medium_large', [ 'class' => 'w-full h-full object-cover hover:scale-105 transition duration-300' ] ); ?>
+                            </a>
+                        <?php else : ?>
+                            <div class="aspect-video w-full bg-slate-100 flex items-center justify-center text-slate-400 text-sm">
+                                Sem imagem
+                            </div>
+                        <?php endif; ?>
+
+                        <!-- Conteúdo -->
+                        <div class="flex flex-col flex-grow p-6">
+                            <h2 class="text-xl font-bold text-slate-900 mb-2 leading-snug">
+                                <a href="<?php the_permalink(); ?>" class="hover:text-blue-600 transition">
+                                    <?php the_title(); ?>
                                 </a>
-                            <?php else : ?>
-                                <div class="bg-light border-bottom d-flex align-items-center justify-content-center text-muted" style="height: 180px;">
-                                    <span>Sem imagem</span>
-                                </div>
-                            <?php endif; ?>
+                            </h2>
 
-                            <div class="card-body p-4 d-flex flex-column">
-                                <h2 class="card-title h5 fw-bold mb-2">
-                                    <a href="<?php the_permalink(); ?>" class="text-decoration-none text-dark">
-                                        <?php the_title(); ?>
-                                    </a>
-                                </h2>
-
-                                <div class="card-text text-muted mb-3 flex-grow-1">
-                                    <?php the_excerpt(); ?>
-                                </div>
-
-                                <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center small text-muted">
-                                    <span><?php echo get_the_date(); ?></span>
-                                    <a href="<?php the_permalink(); ?>" class="fw-bold text-primary text-decoration-none">Ler mais &rarr;</a>
-                                </div>
+                            <div class="text-slate-600 text-sm mb-4 line-clamp-3 flex-grow">
+                                <?php the_excerpt(); ?>
                             </div>
 
-                        </article>
-                    </div>
+                            <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                                <span><?php echo get_the_date(); ?></span>
+                                <a href="<?php the_permalink(); ?>" class="font-semibold text-blue-600 hover:text-blue-700">Ler artigo &rarr;</a>
+                            </div>
+                        </div>
+
+                    </article>
                 <?php endwhile; ?>
             </div>
 
-            <!-- Paginação Centralizada -->
-            <div class="d-flex justify-content-center mt-5">
+            <!-- Paginação -->
+            <div class="mt-12 flex justify-center [&_.page-numbers]:px-4 [&_.page-numbers]:py-2 [&_.page-numbers]:border [&_.page-numbers]:border-slate-200 [&_.page-numbers]:rounded-lg [&_.page-numbers]:text-sm [&_.page-numbers]:mx-1 [&_.page-numbers:hover]:border-blue-600 [&_.page-numbers:hover]:text-blue-600 [&_.current]:bg-blue-600 [&_.current]:text-white [&_.current]:border-blue-600">
                 <?php
                 the_posts_pagination( [
                     'mid_size'  => 2,
@@ -58,8 +60,8 @@
             </div>
 
         <?php else : ?>
-            <div class="text-center py-5">
-                <p class="lead text-muted">Nenhum post encontrado por aqui.</p>
+            <div class="text-center py-16">
+                <p class="text-slate-500 text-base">Nenhum post encontrado.</p>
             </div>
         <?php endif; ?>
 
